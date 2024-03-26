@@ -1,0 +1,127 @@
+---
+import FormattedDate from '../components/FormattedDate.astro';
+import BlogLayout from '../layouts/BlogPost.astro';
+
+const talks = [
+  {
+    title: 'AstroJS: An all in one framework',
+    img: '/talks/astrojs-all-in-one-framework.jpg',
+    description: 'Découvrez AstroJS, un framework de développement web moderne et innovant qui permet aux développeurs de créer des sites web rapides, légers et optimiser pour le SEO.',
+    pubDate: new Date('March 02 2024'),
+    videoLink: 'https://www.youtube.com/watch?v=Y-_FK-yf4zc&pp=ygUHanNiZW5pbg%3D%3D',
+  },
+]
+
+---
+
+<!-- heroImage="/blog-placeholder-about.jpg" -->
+<BlogLayout
+  pubDate={new Date('August 08 2021')}
+  title="Talks"
+	description="Talks that i've made"
+	showDate={false}
+>
+	<div class="talks-list">
+    {talks.map((talk) => (
+      <div class="talk">
+        <a class="youtube-video" href={talk.videoLink} target="_blank">
+          <div class="youtube-play">
+            <div class="youtube-play-btn"></div>
+            </div>
+          <img src={talk.img} alt={talk.title} class="talk-img"/>
+        </a>
+        <div class="talk-body">
+          <h3>{talk.title}</h3>
+          <em>
+						<FormattedDate date={talk.pubDate} />
+          </em>
+          <p>{talk.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</BlogLayout>
+
+<style>
+  .youtube-video {
+    display: block;
+    position: relative;
+  }
+  .youtube-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .youtube-play:hover .youtube-play-btn {
+    transform: rotate(90deg) scale(1.2);
+  }
+  .youtube-play-btn {
+    width: 50px;
+    transition: all .2s;
+    height: 50px;
+    background-color: #f0cf3b;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform: rotate(90deg);
+
+    
+  }
+  .talks-list {
+    display: grid;
+    padding: 0 3em;
+    /* flex-wrap: nowrap; */
+    /* flex-direction: column; */
+    gap: 3em;
+  }
+  .talk {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 0.5em 2em;
+  }
+  .talk-img {
+    // width: 100px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    max-width: 300px;
+    border-radius: 0.3rem;
+    /* filter: grayscale(1) */
+    /* opacity: 0.8; */
+  }
+  .talk-body{
+    /* padding: 0 2em;  */
+    max-width: 400px;
+  }
+  .talk-body h3{
+    font-size: 20px;
+  }
+  .talk-body p{
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  @media (min-width: 600px) {
+      .talk-body{
+        max-width: 400px;
+      }
+      .talk-body h3{
+        /* color: red; */
+      }
+    }
+  @media (min-width: 800px) {
+    .talk {
+      flex-direction: row;
+      align-items: start;
+      text-align: left;
+    }
+    .talks-list {
+      flex-direction: row;
+    }
+      .talk-body{
+        max-width: max-content;
+      }
+  }
+  </style>

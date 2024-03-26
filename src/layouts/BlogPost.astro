@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, showDate } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				/* width: calc(100% - 2em); */
+				/* max-width: 100%; */
+				/* width: 100%; */
+				max-width: var(--wrapper-width);
+				margin: 0 auto;
+				padding-bottom: 6em;
+				
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				height: 350px;
+				/* aspect-ratio: 16/9; */
+				object-fit: cover;
+				/* box-shadow: var(--box-shadow); */
+			}
+			.prose {
+				/* width: 720px;
+				max-width: calc(100% - 2em); */
+				margin: auto;
+				/* padding: 1em; */
+				/* color: red; */
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: var(--date-white);
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="hero-image">
+					{heroImage && <img transition:name={`${title}`} width={1020} height={350} src={heroImage} alt={'Blog post image:' + title } />}
+				</div>
+				<div class="prose">
+					<div class="title">
+						{showDate && (
+
+							<div class="date">
+								<FormattedDate date={pubDate} />
+								{
+									updatedDate && (
+										<div class="last-updated-on">
+											Last updated on <FormattedDate date={updatedDate} />
+											</div>
+											)
+										}
+										</div>
+										)}
+						<h2>{title}</h2>
+						<hr style="opacity: 0.1; margin-top: 1em;" />
+					</div>
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

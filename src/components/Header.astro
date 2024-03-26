@@ -1,0 +1,56 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<header>
+	<nav>
+		<a href='/'>
+			<img width={120}  src='/logo-name.png' alt="Logo image of Khaled Sanny" class="logo-name"/>
+		</a>
+		<ul>
+			<!-- <HeaderLink href="/">Accueil</HeaderLink> -->
+			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href="/talks">Talks</HeaderLink>
+			<HeaderLink class="opacified" href="/projects">Projets</HeaderLink>
+			<!-- <HeaderLink href="/a-propos">A propos</HeaderLink> -->
+		</ul>
+	</nav>
+</header>
+
+<style>
+	.opacified {
+		pointer-events: none;
+		user-select: none;
+		opacity: 0.4;
+		transition: 0.3s;
+	}
+	header {
+		padding: 0em 1em;
+	}
+	nav {
+		padding: 1em 2px;
+		border-top: 4px solid var(--accent);
+		max-width: var(--wrapper-width);
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.logo-name {
+		margin-top: 5px;
+		opacity: 0.8;
+		transition: 0.3s;
+	}
+	.logo-name:hover {
+		opacity: 1;
+	}
+	ul {
+		display: flex;
+		gap: 1em;
+	}
+	li {
+		list-style: none;
+		font-size: 17px;
+	}
+</style>
